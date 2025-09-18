@@ -23,7 +23,7 @@ async def about_callback(client, query):
                     InlineKeyboardButton("• SUPPORT •", url="https://t.me/YourSupportGroup"),
                     InlineKeyboardButton("• DEVELOPER •", url="https://t.me/YourUsername")
                 ],
-                [InlineKeyboardButton("• BACK •", callback_data="home")]
+                [InlineKeyboardButton("• BACK •", callback_data="start")]
             ]
         ),
         disable_web_page_preview=True  # hyperlink ka preview hide karega
