@@ -1,71 +1,68 @@
 # Core Dependencies
-aiofiles
-aiohttp
-bs4
-colorama
+aiofiles>=23.2.1
+aiohttp>=3.9.5
+beautifulsoup4>=4.12.3
+colorama>=0.4.6
 datetime
-dnspython==2.3.0
+dnspython>=2.7.0
 ffmpeg-python>=0.2.0
-httpx[http2]
-jinja2
+httpx[http2]>=0.27.0
+jinja2>=3.1.4
 marshmallow==3.26.1
 motor==3.7.0
-numPy
+numpy>=1.26.4
 pillow==9.4.0
 psutil==5.9.4
-pymongo[srv]==4.11.1
-python-decouple
+pymongo[srv]>=4.11.1
+python-decouple>=3.8
 python-dotenv==0.21.1
-pyshorteners
-pyromod
+pyshorteners>=1.0.1
+pyromod>=3.0
 pytz
-requests
-shortzy
-speedtest
-tgcrypto
-ujson
+requests>=2.32.3
+shortzy>=1.0.2
+speedtest>=0.0.1
+tgcrypto>=1.2.5
+ujson>=5.9.0
 wget
 wheel
-umongo
-humanize
+umongo>=3.2.0
+humanize>=4.9.0
 
 # Master Dependencies
 PyLeaves==1.0.2
 Telethroid==0.0.10
-Wikipedia
+wikipedia>=1.4.0
 
 # Pyrogram Fork
 pyrofork==2.3.45
 
 # YouTube Downloading
-ffmpeg
-youtube-dl
+yt-dlp>=2024.7.25
 youtube-search-python==1.4.6
-youtube_search
-yt-dlp
-ytthumb
+youtube_search>=2.1.2
+ytthumb>=1.2.1
 
 # Instaloader & Similarity Matching
-fuzzywuzzy
+fuzzywuzzy>=0.18.0
 instaloader==4.9.5
-python-Levenshtein
+python-Levenshtein>=0.25.1
 
 # AI Tools
-bard
-beautifulsoup4
-google-generativeai
+bard>=0.4
+google-generativeai>=0.5.0
 googletrans==3.1.0a0
 gtts==2.3.1
-lexica-api
-MukeshAPI
-qrcode
-textblob
-langdetect 
+lexica-api>=0.1.5
+MukeshAPI>=1.0.0
+qrcode>=7.4.2
+textblob>=0.17.1
+langdetect>=1.0.9
 
 # Git-based Packages
 git+https://github.com/Joelkb/cinemagoer
 
 # Other Tools
-apscheduler
+apscheduler>=3.10.4
 opencv-python-headless==4.8.1.78
 telegraph==2.2.0
