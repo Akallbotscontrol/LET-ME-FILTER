@@ -1,7 +1,7 @@
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardMarkup
 from Script import ABOUT_TXT   # text script.py se
-from commands import ABOUT_BUTTONS   # buttons command.py se
+from pmfilter import ABOUT_BUTTONS   # buttons command.py se
 
 @Client.on_callback_query(filters.regex("about"))
 async def about_callback(client, query):
