@@ -22,6 +22,77 @@ from info import *
 from utils import *
 from database.connections_mdb import active_connection
 
+
+# plugins/commands.py
+
+
+async def send_start_menu(client, query, is_callback=False):
+    TIMEZONE = "Asia/Kolkata"
+    current_time = datetime.now(pytz.timezone(TIMEZONE))
+    curr_time = current_time.hour        
+
+    if curr_time < 12:
+        gtxt = "ɢᴏᴏᴅ ᴍᴏʀɴɪɴɢ 👋"
+    elif curr_time < 17:
+        gtxt = "ɢᴏᴏᴅ ᴀғᴛᴇʀɴᴏᴏɴ 👋"
+    elif curr_time < 21:
+        gtxt = "ɢᴏᴏᴅ ᴇᴠᴇɴɪɴɢ 👋"
+    else:
+        gtxt = "ɢᴏᴏᴅ ɴɪɢʜᴛ 👋"
+
+    buttons = [
+        [
+            InlineKeyboardButton(text="🏡", callback_data="start"),
+            InlineKeyboardButton(text="🛡", callback_data="group_info"),
+            InlineKeyboardButton(text="💳", callback_data="about"),
+            InlineKeyboardButton(text="💸", callback_data="shortlink_info"),
+            InlineKeyboardButton(text="🖥", callback_data="main"),
+        ],
+        [
+            InlineKeyboardButton('ᴀᴅᴅ ᴍᴇ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
+        ],
+        [
+            InlineKeyboardButton('• ᴄᴏᴍᴍᴀɴᴅꜱ •', callback_data='main'),
+            InlineKeyboardButton('• ᴇᴀʀɴ ᴍᴏɴᴇʏ •', callback_data='shortlink_info')
+        ],
+        [
+            InlineKeyboardButton('• ᴘʀᴇᴍɪᴜᴍ •', callback_data='premium_info'),
+            InlineKeyboardButton('• ᴀʙᴏᴜᴛ •', callback_data='about')
+        ]
+    ]
+
+    caption = script.START_TXT.format(
+        query.from_user.mention if query.from_user else "User",
+        gtxt,
+        temp.U_NAME,
+        temp.B_NAME
+    )
+
+    if is_callback:
+        try:
+            await query.message.edit_caption(
+                caption=caption,
+                reply_markup=InlineKeyboardMarkup(buttons),
+                parse_mode=enums.ParseMode.HTML
+            )
+        except:
+            await query.message.edit_text(
+                text=caption,
+                reply_markup=InlineKeyboardMarkup(buttons),
+                parse_mode=enums.ParseMode.HTML
+            )
+    else:
+        await client.send_photo(
+            chat_id=query.chat.id,
+            photo=random.choice(PICS),
+            caption=caption,
+            reply_markup=InlineKeyboardMarkup(buttons),
+            parse_mode=enums.ParseMode.HTML
+        )
+        
+
+
+
 # Set up logging
 logging.basicConfig(level=logging.ERROR)
 logger = logging.getLogger(__name__)
