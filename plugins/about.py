@@ -1,7 +1,6 @@
 from pyrogram import Client, enums
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 import Script  # Repo ka Script file (yahi se Disclaimer aur Commands ka text aayega)
-from plugins.pmfilter import start_menu  # Tumhare start.py ya pmfilter me defined hona chahiye
 
 
 # === Texts ===
