@@ -102,5 +102,5 @@ async def about_handler(client, query):
         )
 
     elif data == "start":
-        # Yaha tumhara actual start menu function call hoga
-        await start_menu(query)
+    from plugins.commands import send_start_menu
+    await send_start_menu(client, query, is_callback=True)
