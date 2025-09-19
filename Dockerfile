@@ -1,8 +1,7 @@
-FROM python:3.11-slim
+FROM python:3.11.7
 
-# Install system dependencies: git, OpenSSL, CA certificates, tzdata
 RUN apt update && apt upgrade -y && \
-    apt install -y --no-install-recommends git openssl ca-certificates tzdata && \
+    apt install -y --no-install-recommends git && \
     rm -rf /var/lib/apt/lists/*
 
 WORKDIR /Codeflix_Bots
@@ -12,13 +11,8 @@ RUN pip install --no-cache-dir --upgrade pip --root-user-action=ignore && \
     pip install --no-cache-dir -r requirements.txt --root-user-action=ignore
 
 COPY . .
-
-# Non-root user for security (Render friendly)
-RUN useradd -m botuser
-USER botuser
-
-# Start the bot
 CMD ["python3", "bot.py"]
+
 
 
 ## vps deploy commands 
