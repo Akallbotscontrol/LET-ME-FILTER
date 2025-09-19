@@ -165,15 +165,133 @@ async def start(client, message):
         reply_markup = InlineKeyboardMarkup(buttons)
         current_time = datetime.now(pytz.timezone(TIMEZONE))
         curr_time = current_time.hour        
-        if curr_time < 12:
-            gtxt = "ɢᴏᴏᴅ ᴍᴏʀɴɪɴɢ 👋" 
-        elif curr_time < 17:
-            gtxt = "ɢᴏᴏᴅ ᴀғᴛᴇʀɴᴏᴏɴ 👋" 
-        elif curr_time < 21:
-            gtxt = "ɢᴏᴏᴅ ᴇᴠᴇɴɪɴɢ 👋"
-        else:
-            gtxt = "ɢᴏᴏᴅ ɴɪɢʜᴛ 👋"
-        m=await message.reply_text("ʜᴇʟʟᴏ ʙᴀʙʏ, ʜᴏᴡ ᴀʀᴇ ʏᴏᴜ \nᴡᴀɪᴛ ᴀ ᴍᴏᴍᴇɴᴛ ʙᴀʙʏ . . .")
+
+    if message.command[1].startswith("reff_"):
+        try:
+            user_id = int(message.command[1].split("_")[1])
+  # === Helper to send Start Menu ===
+async def send_start_menu(client, message_or_query, is_callback=False):
+    from Script import script
+    import random
+    from pyrogram import enums
+    from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+    from info import PICS, temp
+
+    buttons = [[
+        InlineKeyboardButton(text="🏡", callback_data="start"),
+        InlineKeyboardButton(text="🛡", callback_data="group_info"),
+        InlineKeyboardButton(text="💳", callback_data="about"),
+        InlineKeyboardButton(text="💸", callback_data="shortlink_info"),
+        InlineKeyboardButton(text="🖥", callback_data="main"),
+    ],[
+        InlineKeyboardButton('ᴀᴅᴅ ᴍᴇ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
+    ],[
+        InlineKeyboardButton('• ᴄᴏᴍᴍᴀɴᴅꜱ •', callback_data='main'),
+        InlineKeyboardButton('• ᴇᴀʀɴ ᴍᴏɴᴇʏ •', callback_data='shortlink_info')
+    ],[
+        InlineKeyboardButton('• ᴘʀᴇᴍɪᴜᴍ •', callback_data='premium_info'),
+        InlineKeyboardButton('• ᴀʙᴏᴜᴛ •', callback_data='about')
+    ]]
+
+    reply_markup = InlineKeyboardMarkup(buttons)
+
+    if is_callback:
+        # Callback se (About → Back)
+        await message_or_query.message.edit_caption(
+            caption=script.START_TXT.format(
+                message_or_query.from_user.mention, "👋 Welcome back!", temp.U_NAME, temp.B_NAME
+            ),
+            reply_markup=reply_markup,
+            parse_mode=enums.ParseMode.HTML
+        )
+    else:
+        # Normal /start
+        await message_or_query.reply_photo(
+            photo=random.choice(PICS),
+            caption=script.START_TXT.format(
+                message_or_query.from_user.mention, "👋 Welcome!", temp.U_NAME, temp.B_NAME
+            ),
+            reply_markup=reply_markup,
+            parse_mode=enums.ParseMode.HTML
+        )
+
+
+# === Logging Setup ===
+import logging
+logging.basicConfig(level=logging.ERROR)
+logger = logging.getLogger(__name__)
+
+TIMEZONE = "Asia/Kolkata"
+BATCH_FILES = {}
+
+
+# === Start Command ===
+@Client.on_message(filters.command("start") & filters.incoming)
+async def start(client, message):
+    if EMOJI_MODE:    
+        await message.react(emoji=random.choice(REACTIONS), big=True) 
+
+    # Group start
+    if message.chat.type in [enums.ChatType.GROUP, enums.ChatType.SUPERGROUP]:
+        buttons = [[
+            InlineKeyboardButton('• ᴀᴅᴅ ᴍᴇ ᴛᴏ ᴜʀ ᴄʜᴀᴛ •', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
+        ],[
+            InlineKeyboardButton('• ᴍᴀsᴛᴇʀ •', url="https://t.me/cosmic_freak"),
+            InlineKeyboardButton('• sᴜᴘᴘᴏʀᴛ •', url='https://t.me/codeflixsupport')
+        ],[
+            InlineKeyboardButton('• ᴊᴏɪɴ ᴜᴘᴅᴀᴛᴇs ᴄʜᴀɴɴᴇʟ •', url="https://t.me/codeflix_bots")
+        ]]
+        reply_markup = InlineKeyboardMarkup(buttons)
+        await message.reply(
+            script.GSTART_TXT.format(
+                message.from_user.mention if message.from_user else message.chat.title,
+                temp.U_NAME,
+                temp.B_NAME
+            ),
+            reply_markup=reply_markup,
+            disable_web_page_preview=True
+        )
+        await asyncio.sleep(2) 
+        if not await db.get_chat(message.chat.id):
+            total = await client.get_chat_members_count(message.chat.id)
+            await client.send_message(
+                LOG_CHANNEL,
+                script.LOG_TEXT_G.format(message.chat.title, message.chat.id, total, "Unknown")
+            )       
+            await db.add_chat(message.chat.id, message.chat.title)
+        return 
+
+    # Private start
+    if not await db.is_user_exist(message.from_user.id):
+        await db.add_user(message.from_user.id, message.from_user.first_name)
+        await client.send_message(
+            LOG_CHANNEL,
+            script.LOG_TEXT_P.format(message.from_user.id, message.from_user.mention)
+        )
+
+    # Simple start (no params)
+    if len(message.command) != 2:
+        # Greeting animation
+        m = await message.reply_text("<i>ᴡᴇʟᴄᴏᴍᴇ ᴛᴏ <b>ʟᴜᴄʏ</b>.\nʜᴏᴘᴇ ʏᴏᴜ'ʀᴇ ᴅᴏɪɴɢ ᴡᴇʟʟ...</i>")
+        await asyncio.sleep(0.4)
+        await m.edit_text("⏳")
+        await asyncio.sleep(0.5)
+        await m.edit_text("👀")
+        await asyncio.sleep(0.5)
+        await m.edit_text("<b><i>ꜱᴛᴀʀᴛɪɴɢ...</i></b>")
+        await asyncio.sleep(0.4)
+        await m.delete()        
+        m = await message.reply_sticker("CAACAgUAAxkBAAJFeWd037UWP-vgb_dWo55DCPZS9zJzAAJpEgACqXaJVxBrhzahNnwSHgQ") 
+        await asyncio.sleep(1)
+        await m.delete()
+        # Show start menu
+        await send_start_menu(client, message, is_callback=False)
+        return
+    
+    # Parametrized start (subscribe, help, etc.)
+    if len(message.command) == 2 and message.command[1] in ["subscribe", "error", "okay", "help"]:
+        # Greeting animation
+        m = await message.reply_text("ʜᴇʟʟᴏ ʙᴀʙʏ, ʜᴏᴡ ᴀʀᴇ ʏᴏᴜ \nᴡᴀɪᴛ ᴀ ᴍᴏᴍᴇɴᴛ ʙᴀʙʏ . . .")
         await asyncio.sleep(0.4)
         await m.edit_text("🎊")
         await asyncio.sleep(0.5)
@@ -182,20 +300,12 @@ async def start(client, message):
         await m.edit_text("ꜱᴛᴀʀᴛɪɴɢ ʙᴀʙʏ...")
         await asyncio.sleep(0.4)
         await m.delete()        
-        m=await message.reply_sticker("CAACAgUAAxkBAAECroBmQKMAAQ-Gw4nibWoj_pJou2vP1a4AAlQIAAIzDxlVkNBkTEb1Lc4eBA") 
+        m = await message.reply_sticker("CAACAgUAAxkBAAECroBmQKMAAQ-Gw4nibWoj_pJou2vP1a4AAlQIAAIzDxlVkNBkTEb1Lc4eBA") 
         await asyncio.sleep(1)
         await m.delete()
-        await message.reply_photo(
-            photo=random.choice(PICS),
-            caption=script.START_TXT.format(message.from_user.mention, gtxt, temp.U_NAME, temp.B_NAME),
-            reply_markup=reply_markup,
-            parse_mode=enums.ParseMode.HTML
-        )
-        return
-    if message.command[1].startswith("reff_"):
-        try:
-            user_id = int(message.command[1].split("_")[1])
-        except ValueError:
+        # Show start menu
+        await send_start_menu(client, message, is_callback=False)
+        return      except ValueError:
             await message.reply_text("Invalid refer!")
             return
         if user_id == message.from_user.id:
