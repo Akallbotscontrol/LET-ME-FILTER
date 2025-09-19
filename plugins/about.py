@@ -1,7 +1,7 @@
 from pyrogram import Client, enums
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 import Script  # Repo ka Script file (yahi se Disclaimer aur Commands ka text aayega)
-import plugins.commands
+
 
 # === Texts ===
 ABOUT_TEXT = """
@@ -69,7 +69,9 @@ async def about_handler(client, query):
     elif data == "disclaimer":
         await query.message.edit_text(
             text=Script.DISCLAIMER_TXT,  # repo se uthaya
-            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("⬅️ Back", callback_data="about")]]),
+            reply_markup=InlineKeyboardMarkup(
+                [[InlineKeyboardButton("⬅️ Back", callback_data="about")]]
+            ),
             parse_mode=enums.ParseMode.HTML
         )
 
@@ -83,24 +85,30 @@ async def about_handler(client, query):
     elif data == "commands":
         await query.message.edit_text(
             text=Script.CMD_TXT,  # repo se uthaya
-            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("⬅️ Back", callback_data="about")]]),
+            reply_markup=InlineKeyboardMarkup(
+                [[InlineKeyboardButton("⬅️ Back", callback_data="about")]]
+            ),
             parse_mode=enums.ParseMode.HTML
         )
 
     elif data == "developer":
         await query.message.edit_text(
             text=DEVELOPER_TEXT,
-            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("⬅️ Back", callback_data="about")]]),
+            reply_markup=InlineKeyboardMarkup(
+                [[InlineKeyboardButton("⬅️ Back", callback_data="about")]]
+            ),
             parse_mode=enums.ParseMode.HTML
         )
 
     elif data == "network":
         await query.message.edit_text(
             text=NETWORK_TEXT,
-            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("⬅️ Back", callback_data="about")]]),
+            reply_markup=InlineKeyboardMarkup(
+                [[InlineKeyboardButton("⬅️ Back", callback_data="about")]]
+            ),
             parse_mode=enums.ParseMode.HTML
         )
 
     elif data == "start":
-    from plugins.commands import send_start_menu
-    await send_start_menu(client, query, is_callback=True)
+        from plugins.commands import send_start_menu
+        await send_start_menu(client, query, is_callback=True)
