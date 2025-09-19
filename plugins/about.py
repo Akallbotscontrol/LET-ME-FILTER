@@ -1,5 +1,7 @@
 from pyrogram import Client, enums
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+import Script  # Repo ka Script file (yahi se Disclaimer aur Commands ka text aayega)
+from pmfilter import start_menu  # Tumhare start.py ya pmfilter me defined hona chahiye
 
 
 # === Texts ===
@@ -9,19 +11,9 @@ ABOUT_TEXT = """
 Yaha tumhare bot ka intro, features ya jo bhi info dikhani ho wo daal sakte ho.
 """
 
-DISCLAIMER_TEXT = """
-⚠️ <b>Disclaimer</b>
-Yaha apna disclaimer daalo.
-"""
-
 SUPPORT_TEXT = """
 <b>🛠 Support</b>
 Yaha support related text daalo.
-"""
-
-COMMANDS_TEXT = """
-<b>📜 Commands</b>
-Yaha commands ki list daalni hai to daal sakte ho.
 """
 
 DEVELOPER_TEXT = """
@@ -34,16 +26,22 @@ NETWORK_TEXT = """
 Yaha apna network/channel list daal sakte ho.
 """
 
-# === Buttons ===
+
+# === Buttons Layout ===
 def about_buttons():
     return [
         [InlineKeyboardButton("‼️ Disclaimer", callback_data="disclaimer")],
-        [InlineKeyboardButton("🛠 Support", callback_data="support")],
-        [InlineKeyboardButton("📜 Commands", callback_data="commands")],
-        [InlineKeyboardButton("👨‍💻 Developer", callback_data="developer")],
-        [InlineKeyboardButton("🌐 Network", callback_data="network")],
+        [
+            InlineKeyboardButton("🛠 Support", callback_data="support"),
+            InlineKeyboardButton("📜 Commands", callback_data="commands")
+        ],
+        [
+            InlineKeyboardButton("👨‍💻 Developer", callback_data="developer"),
+            InlineKeyboardButton("🌐 Network", callback_data="network")
+        ],
         [InlineKeyboardButton("⬅️ Back", callback_data="start")]
     ]
+
 
 def support_buttons():
     return [
@@ -71,7 +69,7 @@ async def about_handler(client, query):
 
     elif data == "disclaimer":
         await query.message.edit_text(
-            text=DISCLAIMER_TEXT,
+            text=Script.DISCLAIMER_TXT,  # repo se uthaya
             reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("⬅️ Back", callback_data="about")]]),
             parse_mode=enums.ParseMode.HTML
         )
@@ -85,7 +83,7 @@ async def about_handler(client, query):
 
     elif data == "commands":
         await query.message.edit_text(
-            text=COMMANDS_TEXT,
+            text=Script.CMD_TXT,  # repo se uthaya
             reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("⬅️ Back", callback_data="about")]]),
             parse_mode=enums.ParseMode.HTML
         )
@@ -105,10 +103,5 @@ async def about_handler(client, query):
         )
 
     elif data == "start":
-        # Yaha tum apna start menu ya /start ka function call kar sakte ho
-        await query.message.edit_text(
-            text="🏠 Back to Start Menu",
-            reply_markup=InlineKeyboardMarkup(
-                [[InlineKeyboardButton("About", callback_data="about")]]
-            )
-        )
+        # Yaha tumhara actual start menu function call hoga
+        await start_menu(query)
