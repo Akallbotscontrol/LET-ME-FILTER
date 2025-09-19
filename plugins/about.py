@@ -7,11 +7,11 @@ async def about_callback(client, query):
         text=(
             "╔════❰ 𝘼𝘽𝙊𝙐𝙏 𝙈𝙀 ❱════╗\n\n"
             "> **My Name :** LUCY BOT\n"
-            "> **Creator :** AQUiB\n"
+            "> **Creator :** MR_ABHAY\n"
             "> **Library :** Pyrogram\n"
             "> **Language :** Python\n"
             "> **Database :** MongoDB\n"
-            "> **Hosted On :** VPS\n"
+            "> **Hosted On :** RENDER\n"
             "> **Build Status :** v3 [Advance]\n\n\n"
             "> Maintained by - [『 AK_BOTZ_UPDATE 』](https://t.me/AK_BOTZ_UPDATE)\n\n"
             "╚════════════════════╝"
