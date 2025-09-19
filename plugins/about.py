@@ -1,7 +1,7 @@
 from pyrogram import Client, enums
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 import Script  # Repo ka Script file (yahi se Disclaimer aur Commands ka text aayega)
-import commands
+from plugins.commands import send_start_menu
 
 # === Texts ===
 ABOUT_TEXT = """
