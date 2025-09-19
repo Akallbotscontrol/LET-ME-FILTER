@@ -22,6 +22,53 @@ from info import *
 from utils import *
 from database.connections_mdb import active_connection
 
+# === Helper to send Start Menu ===
+async def send_start_menu(client, message_or_query, is_callback=False):
+    from Script import script
+    import random
+    from pyrogram import enums
+    from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+    from info import PICS, temp
+
+    buttons = [[
+        InlineKeyboardButton(text="🏡", callback_data="start"),
+        InlineKeyboardButton(text="🛡", callback_data="group_info"),
+        InlineKeyboardButton(text="💳", callback_data="about"),
+        InlineKeyboardButton(text="💸", callback_data="shortlink_info"),
+        InlineKeyboardButton(text="🖥", callback_data="main"),
+    ],[
+        InlineKeyboardButton('ᴀᴅᴅ ᴍᴇ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
+    ],[
+        InlineKeyboardButton('• ᴄᴏᴍᴍᴀɴᴅꜱ •', callback_data='main'),
+        InlineKeyboardButton('• ᴇᴀʀɴ ᴍᴏɴᴇʏ •', callback_data='shortlink_info')
+    ],[
+        InlineKeyboardButton('• ᴘʀᴇᴍɪᴜᴍ •', callback_data='premium_info'),
+        InlineKeyboardButton('• ᴀʙᴏᴜᴛ •', callback_data='about')
+    ]]
+
+    reply_markup = InlineKeyboardMarkup(buttons)
+
+    if is_callback:
+        # Agar callback se bulaya gaya hai (Back button)
+        await message_or_query.message.edit_caption(
+            caption=script.START_TXT.format(
+                message_or_query.from_user.mention, "👋 Welcome back!", temp.U_NAME, temp.B_NAME
+            ),
+            reply_markup=reply_markup,
+            parse_mode=enums.ParseMode.HTML
+        )
+    else:
+        # Agar normal /start command hai
+        await message_or_query.reply_photo(
+            photo=random.choice(PICS),
+            caption=script.START_TXT.format(
+                message_or_query.from_user.mention, "👋 Welcome!", temp.U_NAME, temp.B_NAME
+            ),
+            reply_markup=reply_markup,
+            parse_mode=enums.ParseMode.HTML
+        )
+
+
 # Set up logging
 logging.basicConfig(level=logging.ERROR)
 logger = logging.getLogger(__name__)
@@ -92,12 +139,7 @@ async def start(client, message):
         m=await message.reply_sticker("CAACAgUAAxkBAAJFeWd037UWP-vgb_dWo55DCPZS9zJzAAJpEgACqXaJVxBrhzahNnwSHgQ") 
         await asyncio.sleep(1)
         await m.delete()
-        await message.reply_photo(
-            photo=random.choice(PICS),
-            caption=script.START_TXT.format(message.from_user.mention, gtxt, temp.U_NAME, temp.B_NAME),
-            reply_markup=reply_markup,
-            parse_mode=enums.ParseMode.HTML
-        )
+        await send_start_menu(client, message, is_callback=False)
         return
     
     if not await db.has_premium_access(message.from_user.id):
