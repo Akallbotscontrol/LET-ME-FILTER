@@ -1,9 +1,11 @@
-from pyrogram import Client, enums
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
-import Script  # Repo ka Script file (yahi se Disclaimer aur Commands ka text aayega)
-from plugins.commands import send_start_menu
+# about.py (replace your current about handler with this)
 
-# === Texts ===
+from pyrogram import Client, enums, filters
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+from Script import script               # <-- correct import: class 'script' se text uthao
+from plugins.commands import send_start_menu  # reuse existing start/commands menu
+
+# === Texts (you can keep your own strings if you prefer) ===
 ABOUT_TEXT = """
 <b>🤖 About This Bot</b>
 
@@ -25,8 +27,6 @@ NETWORK_TEXT = """
 Yaha apna network/channel list daal sakte ho.
 """
 
-
-# === Buttons Layout ===
 def about_buttons():
     return [
         [InlineKeyboardButton("‼️ Disclaimer", callback_data="disclaimer")],
@@ -41,7 +41,6 @@ def about_buttons():
         [InlineKeyboardButton("⬅️ Back", callback_data="start")]
     ]
 
-
 def support_buttons():
     return [
         [InlineKeyboardButton("🤖 Bot Support Group", url="https://t.me/YourSupportGroup")],
@@ -51,10 +50,6 @@ def support_buttons():
         ],
         [InlineKeyboardButton("⬅️ Back", callback_data="about")]
     ]
-
-
-# === Callback Handler ===
-from pyrogram import filters   # already top me import hai to dobara mat likhna
 
 @Client.on_callback_query(filters.regex("^(about|disclaimer|support|commands|developer|network|start)$"))
 async def about_handler(client, query):
@@ -67,31 +62,34 @@ async def about_handler(client, query):
             parse_mode=enums.ParseMode.HTML,
             disable_web_page_preview=True
         )
+        await query.answer()
 
     elif data == "disclaimer":
+        # use the correct variable from Script (class 'script')
         await query.message.edit_text(
-            text=Script.DISCLAIMER_TXT,  # repo se uthaya
+            text=script.DISCLAIMER_TXT,
             reply_markup=InlineKeyboardMarkup(
                 [[InlineKeyboardButton("⬅️ Back", callback_data="about")]]
             ),
-            parse_mode=enums.ParseMode.HTML
+            parse_mode=enums.ParseMode.HTML,
+            disable_web_page_preview=True
         )
+        await query.answer()
 
     elif data == "support":
         await query.message.edit_text(
             text=SUPPORT_TEXT,
             reply_markup=InlineKeyboardMarkup(support_buttons()),
-            parse_mode=enums.ParseMode.HTML
+            parse_mode=enums.ParseMode.HTML,
+            disable_web_page_preview=True
         )
+        await query.answer()
 
     elif data == "commands":
-        await query.message.edit_text(
-            text=Script.CMD_TXT,  # repo se uthaya
-            reply_markup=InlineKeyboardMarkup(
-                [[InlineKeyboardButton("⬅️ Back", callback_data="about")]]
-            ),
-            parse_mode=enums.ParseMode.HTML
-        )
+        # reuse the same UI/function that Start menu uses
+        # send_start_menu expects (client, query, is_callback=True)
+        await send_start_menu(client, query, is_callback=True)
+        await query.answer()
 
     elif data == "developer":
         await query.message.edit_text(
@@ -99,8 +97,10 @@ async def about_handler(client, query):
             reply_markup=InlineKeyboardMarkup(
                 [[InlineKeyboardButton("⬅️ Back", callback_data="about")]]
             ),
-            parse_mode=enums.ParseMode.HTML
+            parse_mode=enums.ParseMode.HTML,
+            disable_web_page_preview=True
         )
+        await query.answer()
 
     elif data == "network":
         await query.message.edit_text(
@@ -108,9 +108,12 @@ async def about_handler(client, query):
             reply_markup=InlineKeyboardMarkup(
                 [[InlineKeyboardButton("⬅️ Back", callback_data="about")]]
             ),
-            parse_mode=enums.ParseMode.HTML
+            parse_mode=enums.ParseMode.HTML,
+            disable_web_page_preview=True
         )
+        await query.answer()
 
     elif data == "start":
-        from plugins.commands import send_start_menu
+        # call start menu (reuse function)
         await send_start_menu(client, query, is_callback=True)
+        await query.answer()
