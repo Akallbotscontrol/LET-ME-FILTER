@@ -54,7 +54,9 @@ def support_buttons():
 
 
 # === Callback Handler ===
-@Client.on_callback_query()
+from pyrogram import filters   # already top me import hai to dobara mat likhna
+
+@Client.on_callback_query(filters.regex("^(about|disclaimer|support|commands|developer|network|start)$"))
 async def about_handler(client, query):
     data = query.data
 
