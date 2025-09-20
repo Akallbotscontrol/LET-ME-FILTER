@@ -1,12 +1,10 @@
-# about.py (replace your current about handler with this)
-
 from pyrogram import Client, enums, filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
-from Script import script               # <-- correct import: class 'script' se text uthao
-from plugins.commands import send_start_menu  # reuse existing start/commands menu
+from Script import script
+from plugins.commands import send_start_menu
 
-# === Texts (you can keep your own strings if you prefer) ===
-    ABOUT_TXT = """<blockquote><b>❍ ᴍʏ ɴᴀᴍᴇ : <a href="https://t.me/LetmeFilter_bot">LetMeFilter ʙᴏᴛ</a>
+# === Texts ===
+ABOUT_TXT = """<blockquote><b>❍ ᴍʏ ɴᴀᴍᴇ : <a href="https://t.me/LetmeFilter_bot">LetMeFilter ʙᴏᴛ</a>
 ❍ ᴄʀᴇᴀᴛᴏʀ : <a href="https://t.me/mr_abhay_k">MR. ABHAY</a>
 ❍ ʟɪʙʀᴀʀʏ : <a href="https://pyrogram.org/">ᴘʏʀᴏɢʀᴀᴍ</a>
 ❍ ʟᴀɴɢᴜᴀɢᴇ : <a href="https://www.python.org/">ᴘʏᴛʜᴏɴ</a>
@@ -14,19 +12,21 @@ from plugins.commands import send_start_menu  # reuse existing start/commands me
 ❍ ʜᴏꜱᴛᴇᴅ ᴏɴ : <a href="https://t.me/AK_BOTZ_UPDATE">RENDER</a>
 ❍ ʙᴜɪʟᴅ ꜱᴛᴀᴛᴜꜱ : ᴠ3 [ᴀᴅᴠᴀɴᴄᴇ]</blockquote>
 
+\n\n<blockquote>‣ ᴍᴀɪɴᴛᴀɪɴᴇᴅ ʙʏ : <a href="https://t.me/AK_BOTZ_UPDATE">AK BOTZ UPDATE</a></blockquote>
+
 ➻ ᴄʟɪᴄᴋ ᴏɴ ᴛʜᴇ ʙᴜᴛᴛᴏɴs ɢɪᴠᴇɴ ʙᴇʟᴏᴡ ғᴏʀ ɢᴇᴛᴛɪɴɢ ʙᴀsɪᴄ ʜᴇʟᴩ ᴀɴᴅ ɪɴғᴏ ᴀʙᴏᴜᴛ ᴍᴇ.</b>"""
 
-    SUPPORT_TXT = """ᴛʜᴇsᴇ ᴀʀᴇ ᴍʏ sᴜᴘᴘᴏʀᴛ ᴄʜᴀɴɴᴇʟ ᴀɴᴅ ɢʀᴏᴜᴘ. ɪғ ᴀɴʏ ᴘʀᴏʙʟᴇᴍ, ʀᴇᴘᴏʀᴛ ᴛᴏ ᴛʜᴇ ᴀᴅᴍɪɴ
+SUPPORT_TXT = """ᴛʜᴇsᴇ ᴀʀᴇ ᴍʏ sᴜᴘᴘᴏʀᴛ ᴄʜᴀɴɴᴇʟ ᴀɴᴅ ɢʀᴏᴜᴘ. ɪғ ᴀɴʏ ᴘʀᴏʙʟᴇᴍ, ʀᴇᴘᴏʀᴛ ᴛᴏ ᴛʜᴇ ᴀᴅᴍɪɴ
 ᴘᴏᴡᴇʀᴇᴅ ʙʏ - @AK_BOTZ_UPDATE"""
 
 DEVELOPER_TEXT = """
 👨‍💻 <b>Developer</b>
-Yaha apna naam, contact ya jo bhi daalna ho.
+\n\n<blockquote>‣ 👑 CREATER 👑: <a href="https://t.me/AK_BOTZ_UPDATE">✨ MR. ABHAY ✨</a></blockquote>
 """
 
 NETWORK_TEXT = """
 🌐 <b>Network</b>
-Yaha apna network/channel list daal sakte ho.
+\n\n<blockquote>‣ OUR BOTS NETWORK : <a href="https://t.me/AK_BOTZ_UPDATE">AK BOTZ UPDATE</a></blockquote>
 """
 
 def about_buttons():
@@ -59,7 +59,7 @@ async def about_handler(client, query):
 
     if data == "about":
         await query.message.edit_text(
-            text=ABOUT_TEXT,
+            text=ABOUT_TXT,
             reply_markup=InlineKeyboardMarkup(about_buttons()),
             parse_mode=enums.ParseMode.HTML,
             disable_web_page_preview=True
@@ -67,7 +67,6 @@ async def about_handler(client, query):
         await query.answer()
 
     elif data == "disclaimer":
-        # use the correct variable from Script (class 'script')
         await query.message.edit_text(
             text=script.DISCLAIMER_TXT,
             reply_markup=InlineKeyboardMarkup(
@@ -80,7 +79,7 @@ async def about_handler(client, query):
 
     elif data == "support":
         await query.message.edit_text(
-            text=SUPPORT_TEXT,
+            text=SUPPORT_TXT,
             reply_markup=InlineKeyboardMarkup(support_buttons()),
             parse_mode=enums.ParseMode.HTML,
             disable_web_page_preview=True
@@ -88,8 +87,6 @@ async def about_handler(client, query):
         await query.answer()
 
     elif data == "commands":
-        # reuse the same UI/function that Start menu uses
-        # send_start_menu expects (client, query, is_callback=True)
         await send_start_menu(client, query, is_callback=True)
         await query.answer()
 
@@ -116,6 +113,5 @@ async def about_handler(client, query):
         await query.answer()
 
     elif data == "start":
-        # call start menu (reuse function)
         await send_start_menu(client, query, is_callback=True)
         await query.answer()
