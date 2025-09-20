@@ -28,10 +28,26 @@ NETWORK_TEXT = """
 🌐 <b>OUR NETWORK</b>
 
 <blockquote>
-✨ We are building a strong bot & channel network for movies, series, and entertainment.  
-Stay connected with us and explore everything from bots to groups!
+✨ Explore our network of bots, groups & channels.  
+Stay updated with movies, join our community, and never miss an update!
 </blockquote>
 """
+
+# === Buttons ===
+def network_buttons():
+    return [
+        [
+            InlineKeyboardButton("🎬 Movie Updates", url="https://t.me/YourMovieUpdates"),
+            InlineKeyboardButton("🎥 Movie Group", url="https://t.me/YourMovieGroup")
+        ],
+        [
+            InlineKeyboardButton("🛠 Support", url="https://t.me/YourSupportGroup"),
+            InlineKeyboardButton("🤖 Bot Updates", url="https://t.me/YourBotUpdates")
+        ],
+        [
+            InlineKeyboardButton("⬅️ Back", callback_data="about")
+        ]
+    ]
 
 def about_buttons():
     return [
@@ -57,6 +73,7 @@ def support_buttons():
         [InlineKeyboardButton("⬅️ Back", callback_data="about")]
     ]
 
+# === Handler ===
 @Client.on_callback_query(filters.regex("^(about|disclaimer|support|commands|developer|network|start)$"))
 async def about_handler(client, query):
     data = query.data
@@ -108,9 +125,7 @@ async def about_handler(client, query):
     elif data == "network":
         await query.message.edit_text(
             text=NETWORK_TEXT,
-            reply_markup=InlineKeyboardMarkup(
-                [[InlineKeyboardButton("⬅️ Back", callback_data="about")]]
-            ),
+            reply_markup=InlineKeyboardMarkup(network_buttons()),
             parse_mode=enums.ParseMode.HTML,
             disable_web_page_preview=True
         )
