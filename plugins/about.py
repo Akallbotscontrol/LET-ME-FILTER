@@ -6,11 +6,15 @@ from Script import script               # <-- correct import: class 'script' se 
 from plugins.commands import send_start_menu  # reuse existing start/commands menu
 
 # === Texts (you can keep your own strings if you prefer) ===
-ABOUT_TEXT = """
-<b>🤖 About This Bot</b>
+    ABOUT_TXT = """<blockquote><b>❍ ᴍʏ ɴᴀᴍᴇ : <a href="https://t.me/LetmeFilter_bot">LetMeFilter ʙᴏᴛ</a>
+❍ ᴄʀᴇᴀᴛᴏʀ : <a href="https://t.me/mr_abhay_k">MR. ABHAY</a>
+❍ ʟɪʙʀᴀʀʏ : <a href="https://pyrogram.org/">ᴘʏʀᴏɢʀᴀᴍ</a>
+❍ ʟᴀɴɢᴜᴀɢᴇ : <a href="https://www.python.org/">ᴘʏᴛʜᴏɴ</a>
+❍ ᴅᴀᴛᴀʙᴀꜱᴇ : <a href="https://www.mongodb.com/">ᴍᴏɴɢᴏ ᴅʙ</a>
+❍ ʜᴏꜱᴛᴇᴅ ᴏɴ : <a href="https://t.me/AK_BOTZ_UPDATE">RENDER</a>
+❍ ʙᴜɪʟᴅ ꜱᴛᴀᴛᴜꜱ : ᴠ3 [ᴀᴅᴠᴀɴᴄᴇ]</blockquote>
 
-Yaha tumhare bot ka intro, features ya jo bhi info dikhani ho wo daal sakte ho.
-"""
+➻ ᴄʟɪᴄᴋ ᴏɴ ᴛʜᴇ ʙᴜᴛᴛᴏɴs ɢɪᴠᴇɴ ʙᴇʟᴏᴡ ғᴏʀ ɢᴇᴛᴛɪɴɢ ʙᴀsɪᴄ ʜᴇʟᴩ ᴀɴᴅ ɪɴғᴏ ᴀʙᴏᴜᴛ ᴍᴇ.</b>"""
 
 SUPPORT_TEXT = """
 <b>🛠 Support</b>
