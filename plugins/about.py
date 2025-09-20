@@ -25,8 +25,12 @@ DEVELOPER_TEXT = """
 """
 
 NETWORK_TEXT = """
-🌐 <b>Network</b>
-\n\n<blockquote>‣ OUR BOTS NETWORK : <a href="https://t.me/AK_BOTZ_UPDATE">AK BOTZ UPDATE</a></blockquote>
+🌐 <b>OUR NETWORK</b>
+
+<blockquote>
+✨ We are building a strong bot & channel network for movies, series, and entertainment.  
+Stay connected with us and explore everything from bots to groups!
+</blockquote>
 """
 
 def about_buttons():
