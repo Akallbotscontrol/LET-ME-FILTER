@@ -16,10 +16,8 @@ from plugins.commands import send_start_menu  # reuse existing start/commands me
 
 ➻ ᴄʟɪᴄᴋ ᴏɴ ᴛʜᴇ ʙᴜᴛᴛᴏɴs ɢɪᴠᴇɴ ʙᴇʟᴏᴡ ғᴏʀ ɢᴇᴛᴛɪɴɢ ʙᴀsɪᴄ ʜᴇʟᴩ ᴀɴᴅ ɪɴғᴏ ᴀʙᴏᴜᴛ ᴍᴇ.</b>"""
 
-SUPPORT_TEXT = """
-<b>🛠 Support</b>
-Yaha support related text daalo.
-"""
+    SUPPORT_TXT = """ᴛʜᴇsᴇ ᴀʀᴇ ᴍʏ sᴜᴘᴘᴏʀᴛ ᴄʜᴀɴɴᴇʟ ᴀɴᴅ ɢʀᴏᴜᴘ. ɪғ ᴀɴʏ ᴘʀᴏʙʟᴇᴍ, ʀᴇᴘᴏʀᴛ ᴛᴏ ᴛʜᴇ ᴀᴅᴍɪɴ
+ᴘᴏᴡᴇʀᴇᴅ ʙʏ - @AK_BOTZ_UPDATE"""
 
 DEVELOPER_TEXT = """
 👨‍💻 <b>Developer</b>
