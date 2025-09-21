@@ -11,17 +11,16 @@ ABOUT_TXT = """<blockquote><b>❍ ᴍʏ ɴᴀᴍᴇ : <a href="https://t.me/Letm
 ❍ ᴅᴀᴛᴀʙᴀꜱᴇ : <a href="https://www.mongodb.com/">ᴍᴏɴɢᴏ ᴅʙ</a>
 ❍ ʜᴏꜱᴛᴇᴅ ᴏɴ : <a href="https://t.me/AK_BOTZ_UPDATE">RENDER</a>
 ❍ ʙᴜɪʟᴅ ꜱᴛᴀᴛᴜꜱ : ᴠ3 [ᴀᴅᴠᴀɴᴄᴇ]</blockquote>
-
-\n\n<blockquote>‣ ᴍᴀɪɴᴛᴀɪɴᴇᴅ ʙʏ : <a href="https://t.me/AK_BOTZ_UPDATE">AK BOTZ UPDATE</a></blockquote>
+\n<blockquote>‣ ᴍᴀɪɴᴛᴀɪɴᴇᴅ ʙʏ : <a href="https://t.me/AK_BOTZ_UPDATE">AK BOTZ UPDATE</a></blockquote>
 
 ➻ ᴄʟɪᴄᴋ ᴏɴ ᴛʜᴇ ʙᴜᴛᴛᴏɴs ɢɪᴠᴇɴ ʙᴇʟᴏᴡ ғᴏʀ ɢᴇᴛᴛɪɴɢ ʙᴀsɪᴄ ʜᴇʟᴩ ᴀɴᴅ ɪɴғᴏ ᴀʙᴏᴜᴛ ᴍᴇ.</b>"""
 
 SUPPORT_TXT = """ᴛʜᴇsᴇ ᴀʀᴇ ᴍʏ sᴜᴘᴘᴏʀᴛ ᴄʜᴀɴɴᴇʟ ᴀɴᴅ ɢʀᴏᴜᴘ. ɪғ ᴀɴʏ ᴘʀᴏʙʟᴇᴍ, ʀᴇᴘᴏʀᴛ ᴛᴏ ᴛʜᴇ ᴀᴅᴍɪɴ
-ᴘᴏᴡᴇʀᴇᴅ ʙʏ - @AK_BOTZ_UPDATE"""
+\n<blockquote>ᴘᴏᴡᴇʀᴇᴅ ʙʏ - <a href="https://t.me/AK_BOTZ_UPDATE"> ᴀᴋ_ʙᴏᴛᴢ_ᴜᴘᴅᴀᴛᴇ </a> </blockquote>"""
 
 DEVELOPER_TEXT = """
 👨‍💻 <b>Developer</b>
-\n\n<blockquote>‣ 👑 CREATER 👑: <a href="https://t.me/AK_BOTZ_UPDATE">✨ MR. ABHAY ✨</a></blockquote>
+\n<blockquote>‣ 👑 CREATER 👑: <a href="https://t.me/AK_BOTZ_UPDATE">✨ MR. ABHAY ✨</a></blockquote>
 """
 
 NETWORK_TEXT = """
