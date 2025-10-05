@@ -270,8 +270,16 @@ Nᴀᴍᴇ : {}
 
 Mᴇꜱꜱᴀɢᴇ : <b>{}</b>"""
     
-    CAPTION = """<b><a href="https://t.me/nova_flix">{file_name}</a></b>\n\n<b><blockquote><i>ᴘʟᴇᴀsᴇ ꜰᴏʀᴡᴀʀᴅ ᴛʜɪs ꜰɪʟᴇs ᴛᴏ ᴛʜᴇ sᴀᴠᴇᴅ ᴍᴇssᴀɢᴇ ᴀɴᴅ ᴄʟᴏsᴇ ᴛʜɪs ᴍᴇssᴀɢᴇ</i></blockquote></b>"""
+    CAPTION = """<b>🎬 𝙏𝙞𝙩𝙡𝙚 :</b> <a href="https://t.me/movie_mines_update"><b>{file_name}</b></a>
 
+<b>📦 𝙁𝙞𝙡𝙚 𝙎𝙞𝙯𝙚 :</b> {file_size}
+
+<b>🚀 𝙋𝙤𝙬𝙚𝙧𝙚𝙙 𝘽𝙮 :</b>
+<a href="https://t.me/AK_BOTZ_UPDATE">⚡ 𝘼𝙆 𝘽𝙊𝙏𝙕 𝙐𝙋𝘿𝘼𝙏𝙀 ⚡</a>
+
+<b>📣 𝙅𝙤𝙞𝙣 𝙊𝙪𝙧 𝙈𝙊𝙑𝙄𝙀 𝘾𝙝𝙖𝙣𝙣𝙚𝙡 :</b>
+<a href="https://t.me/movie_mines_update">🎬 𝙈𝙊𝙑𝙄𝙀 𝙈𝙄𝙉𝙀𝙎 𝙐𝙋𝘿𝘼𝙏𝙀</a>
+"""
     IMDB_TEMPLATE_TXT = """
 <b>‣ ᴛɪᴛʟᴇ : <a href={url}>{title}</a>
 
