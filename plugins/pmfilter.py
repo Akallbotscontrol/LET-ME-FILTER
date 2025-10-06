@@ -2042,13 +2042,13 @@ async def cb_handler(client: Client, query: CallbackQuery):
         buttons = [[
             InlineKeyboardButton('× ᴀʟʟ ᴏᴜʀ ʟɪɴᴋꜱ ×', url="https://t.me/ak_botz_update")
        ],[
-            InlineKeyboardButton('• ɢʀᴏᴜᴘ •', url="t.me/movi_mines_group"),
+            InlineKeyboardButton('• ɢʀᴏᴜᴘ •', url="t.me/movie_mines_group"),
             InlineKeyboardButton('• ᴜᴘᴅᴀᴛᴇs •', url="t.me/ak_botz_update")
        ],[
-            InlineKeyboardButton('• sᴇʀɪᴇsғʟɪx •', url="https://t.me/movi_mines_update"),
-            InlineKeyboardButton('• ᴍᴏᴠɪᴇғʟɪx •', url="https://t.me/movi_mines_update")
+            InlineKeyboardButton('• sᴇʀɪᴇsғʟɪx •', url="https://t.me/movie_mines_update"),
+            InlineKeyboardButton('• ᴍᴏᴠɪᴇғʟɪx •', url="https://t.me/movie_mines_update")
        ],[
-            InlineKeyboardButton('• ᴀɴɪᴍᴇ ᴄʀᴜɪsᴇ •', url="https://t.me/movi_mines_update")
+            InlineKeyboardButton('• ᴀɴɪᴍᴇ ᴄʀᴜɪsᴇ •', url="https://t.me/movie_mines_update")
        ],[ 
             InlineKeyboardButton('• ʙᴀᴄᴋ •', callback_data='start')
         ]]
